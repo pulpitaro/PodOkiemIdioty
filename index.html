@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>PodOkiemIdioty</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div id="container">
+    <div id="navbar" style="display: flex;flex-direction: row;gap: 10px;">
+    <div id="lifestyle" class="dropdown">
+    <a href="lifestyle.html">Lifestyle</a> --
+    <div id="hlifestyle" class="dropdown-content"></div>
+    </div>
+    <div id="recenzje" class="dropdown">
+    <a href="recenzje.html">Recenzje</a> --
+    <div id="hrecenzje" class="dropdown-content"></div>
+    </div>
+    <a href="portfolio.html">Portfolio</a>
+    </div>
+    <div id="content"></div>
+    <div id="footer">
+    <a href="https://github.com/pulpitaro/PodOkiemIdioty">Pobierz moją aplikację z oficjalnego repozytorium!</a> <br>
+    <a href="https://www.youtube.com">Zobacz również mój kanał na Youtube!</a>
+    </div>
+    </div>
+    <script>
+        const GITHUB_BASE = "https://raw.githubusercontent.com/pulpitaro/PodOkiemIdioty/refs/heads/main/";
+        async function getfile(addres) {
+            const content = document.getElementById('content')
+            try {
+                const url = GITHUB_BASE + addres;
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Błąd sieci!');
+                const rawMarkdown = await response.text();
+                content.innerHTML = marked.parse(rawMarkdown);
+            } catch (code) {
+                console.error("Error: ", code);
+            }
+        }
+        getfile("Readme.md");
+
+        async function getlastfive(addres, bar) {
+            const nav = document.getElementById(bar)
+            try {
+
+                const url = GITHUB_BASE + addres;
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Błąd sieci!');
+                const list = await response.text();
+                const last5Lines = list.split('\n').slice(0, 5).join('\n');
+                nav.innerHTML = last5Lines;
+
+            } catch (code) {
+                console.error("Error: ", code);
+            }
+
+        }
+        getlastfive("Content/lists/lifestyle.txt", "hlifestyle");
+        getlastfive("Content/lists/reviews.txt", "hrecenzje");
+    </script>
+</body>
+</html>
