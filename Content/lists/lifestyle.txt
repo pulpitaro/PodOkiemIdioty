@@ -1,1 +1,1 @@
-<a href="Content/lifestyle/O_moich_tabletach/init.html">O moich tabletach</a>
+<button onclick="getfile('pulpitaro/PodOkiemIdioty/refs/heads/main/Content/lifestyle/O_moich_tabletach.md')"> O Moich Tabletach </button>
