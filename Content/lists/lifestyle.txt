@@ -1,1 +1,1 @@
-<button onclick="getfile('pulpitaro/PodOkiemIdioty/refs/heads/main/Content/lifestyle/O_moich_tabletach.md')"> O Moich Tabletach </button>
+<button onclick="getfile('Content/lifestyle/O_moich_tabletach.md')"> O Moich Tabletach </button>
